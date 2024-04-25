@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/img/platypus.ico" type="image/x-icon" rel="icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlatyFin</title>
+    <!-- Bootstrap CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../static/css/glyphicon.css" rel="stylesheet">
+    <link href="../static/css/base.css" rel="stylesheet">
+    <style>
+        .hiddenRow {
+            padding: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% block header %}{% endblock %}
+    <!-- MESSAGE BAR -->
+    <div class="container">
+        <!-- ERROR -->
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        <!-- INFO -->
+        {% if info %}
+        <div class="alert alert-primary" role="alert">
+            {{ info }}
+        </div>
+        {% endif %}
+
+        <!-- messages -->
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-primary" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>  
+
+    <!-- child template -->
+    {% block content %}{% endblock %}
+
+    {% block footer %}{% endblock %}
+    <!-- Bootstrap JS, jQuery, and Popper.js -->
+    <script src="../../static/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="../../static/js/popper.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

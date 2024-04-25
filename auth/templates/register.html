@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block header %}{% include "loginHeader.html" %}{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Entry Form</h5>
+          <form class="form-signin" method="post">
+            <div class="form-label-group">
+              <input type="email" name="inputEmail" class="form-control text-lowercase" placeholder="Email" required autofocus>
+            </div>
+            <br>
+            <div class="form-label-group">
+              <input type="text" name="inputUsername" class="form-control text-lowercase" placeholder="Username" required autofocus>
+            </div>
+            <br>
+            <div class="form-label-group">
+              <input type="password" class="form-control" name="inputPassword" placeholder="Password" required>
+            </div>
+            <br>
+            <div class="form-label-group">
+              <input type="password" class="form-control" name="inputPasswordConfirm" placeholder="Confirm" required>
+            </div>
+            <hr class="my-6">
+            <button class="btn btn-lg btn-primary btn-block " type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+<!-- FOOTER -->
+<footer class="fixed-bottom">
+    <p>&copy; 2024 PlatyFin. All rights reserved.</p>
+</footer>
+{% endblock %}

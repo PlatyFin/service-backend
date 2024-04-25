@@ -1,0 +1,14 @@
+DateTime
+Flask
+Flask-RESTful
+Flask-SQLAlchemy
+Flask-Bcrypt
+Flask-marshmallow
+marshmallow-sqlalchemy
+gunicorn
+Jinja2
+psycopg2-binary
+python-dotenv
+requests
+Werkzeug
+email-validator
