@@ -11,6 +11,7 @@ import json
 from auth.resource import UserByUsername, UserOperations, UserByEmail
 # views
 from auth.views import *
+from darkflow.resource import DarkFlow
 
 #### CONFIG ####
 auth = Blueprint('auth', __name__, template_folder='templates')
@@ -19,6 +20,8 @@ auth = Blueprint('auth', __name__, template_folder='templates')
 userByUsernameObj = UserByUsername()
 userOperationsObj = UserOperations()
 userByEmailObj = UserByEmail()
+
+darkflowObj = DarkFlow()
 
 #### DECORATORS ####
 # login required
@@ -37,8 +40,12 @@ def login_required(f):
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
+        if 'x-platyfin-user' in session:
+            return redirect(url_for('darkflow.getDarkflowList'))
         return render_template('login.html')
     if request.method == 'POST':
+        if 'x-platyfin-user' in session:
+            return redirect(url_for('darkflow.getDarkflowList'))
         if request.form['action'] == 'register':
             return redirect(url_for('auth.register'))
         if request.form['action'] == 'login':
@@ -68,12 +75,16 @@ def login():
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
+        if 'x-platyfin-user' in session:
+            return redirect(url_for('darkflow.getDarkflowList'))
         if request.args.get('error'):
             error = request.args.get('error')
         else:
             error = None
         return render_template('register.html', error=error)
     if request.method == 'POST':
+        if 'x-platyfin-user' in session:
+            return redirect(url_for('darkflow.getDarkflowList'))
         if request.form['inputEmail'] != '':
             try:
                 # Validate email address
@@ -105,9 +116,6 @@ def register():
         else:
             error = 'Missing require data'
             return redirect(url_for('auth.register', error=error))  # return statement
-
-
-
 
 # logout
 @auth.route('/logout')

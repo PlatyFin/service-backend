@@ -1,7 +1,7 @@
-from flask import render_template, request, Blueprint
+from flask import render_template, request, Blueprint, session, redirect
 from datetime import datetime
 from email_validator import validate_email, EmailNotValidError
-
+from auth import views
 from .resource import DarkFlow
 
 #### CONFIG ####
@@ -14,6 +14,8 @@ darkflow = Blueprint('darkflow', __name__, template_folder='templates')
 def trendingChart():
     error = info = None
     if request.method == 'GET':
+        if 'x-platyfin-user' in session:
+            return redirect('/darkflow')
         return render_template('landing.html')
 
 
@@ -21,6 +23,8 @@ def trendingChart():
 @darkflow.route('/addSubscribeEmail', methods=['POST'])
 def addSubscribeEmail():
     error = info = None
+    if 'x-platyfin-user' in session:
+            return redirect('/darkflow')
     if request.form.get('subscriberEmail') != '':
         try:
             # Validate email address
@@ -38,6 +42,7 @@ def addSubscribeEmail():
     return render_template('landing.html', error=error, info=info)
 
 @darkflow.route('/darkflow', methods=['GET'])
+@views.login_required
 def getDarkflowList():
     error = info = None
     if request.method == 'GET':
