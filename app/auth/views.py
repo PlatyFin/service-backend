@@ -11,7 +11,7 @@ import json
 from auth.resource import UserByUsername, UserOperations, UserByEmail
 # views
 from auth.views import *
-from darkflow.resource import DarkFlow
+from landing.resource import LandingPageUtilities
 
 #### CONFIG ####
 auth = Blueprint('auth', __name__, template_folder='templates')
@@ -20,8 +20,6 @@ auth = Blueprint('auth', __name__, template_folder='templates')
 userByUsernameObj = UserByUsername()
 userOperationsObj = UserOperations()
 userByEmailObj = UserByEmail()
-
-darkflowObj = DarkFlow()
 
 #### DECORATORS ####
 # login required
@@ -41,11 +39,11 @@ def login_required(f):
 def login():
     if request.method == 'GET':
         if 'x-platyfin-user' in session:
-            return redirect(url_for('darkflow.getDarkflowList'))
+            return redirect(url_for('strategies.getDarkflowList'))
         return render_template('login.html')
     if request.method == 'POST':
         if 'x-platyfin-user' in session:
-            return redirect(url_for('darkflow.getDarkflowList'))
+            return redirect(url_for('strategies.getDarkflowList'))
         if request.form['action'] == 'register':
             return redirect(url_for('auth.register'))
         if request.form['action'] == 'login':
@@ -62,7 +60,7 @@ def login():
                         session.permanent = False
                         auth.permanent_session_lifetime = timedelta(minutes=30)
                         info = 'Welcome {} !'.format(request.form['username'].lower())
-                        return redirect(url_for('darkflow.getDarkflowList', info=info))
+                        return redirect(url_for('strategies.getDarkflowList', info=info))
                     else:
                         error = 'Invalid Credentials.'
                         return redirect(url_for('auth.login', error=error))
@@ -76,7 +74,7 @@ def login():
 def register():
     if request.method == 'GET':
         if 'x-platyfin-user' in session:
-            return redirect(url_for('darkflow.getDarkflowList'))
+            return redirect(url_for('strategies.getDarkflowList'))
         if request.args.get('error'):
             error = request.args.get('error')
         else:
@@ -84,7 +82,7 @@ def register():
         return render_template('register.html', error=error)
     if request.method == 'POST':
         if 'x-platyfin-user' in session:
-            return redirect(url_for('darkflow.getDarkflowList'))
+            return redirect(url_for('strategies.getDarkflowList'))
         if request.form['inputEmail'] != '':
             try:
                 # Validate email address

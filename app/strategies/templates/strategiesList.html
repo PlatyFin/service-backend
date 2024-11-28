@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block header %}{% include "logoutHeader.html" %}{% endblock %}
+{% block content %}
+    
+
+    <div class="container">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="trending-up-tab-pane" role="tabpanel" aria-labelledby="trending-up-tab"
+                tabindex="0">
+
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Strategy Name</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-bs-toggle="collapse" data-bs-target="#stategiesCollapse-darkflow" class="accordion-toggle" aria-expanded="false" aria-controls="stategiesCollaps-darkflow">
+                            <td>
+                                <a class="btn btn-default btn-xs" target="_blank" href="{{ url_for('strategies.getDarkflowList') }}">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                </a>
+                            </td>
+                            <td>
+                                Darkflow
+                            </td>
+                            <td>
+                                100%
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var prvChartContainerId = null;
+        var prvCollapseElementId = null;
+        // Add click event listeners to each button
+        document.querySelectorAll('.btn').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                var stategiesContainerId = "stategiesCollapse-darkflow";
+                // If there is a previously opened collapse and it's not the current one, hide it
+                alert(stategiesContainerId)
+                
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block footer %}
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2024 PlatyFin. All rights reserved.</p>
+</footer>
+{% endblock %}

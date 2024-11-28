@@ -2,6 +2,7 @@ DateTime
 Flask
 Flask-RESTful
 Flask-SQLAlchemy
+SQLAlchemy
 Flask-Bcrypt
 Flask-marshmallow
 marshmallow-sqlalchemy
@@ -12,3 +13,4 @@ python-dotenv
 requests
 Werkzeug
 email-validator
+alpaca-trade-api
